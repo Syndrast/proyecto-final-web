@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+// Asegúrate de importar HasOne
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Enrollment extends Model
 {
     use HasFactory;
-    // Ojo: 'id' no es fillable por defecto.
     protected $fillable = ['student_id', 'subject_id', 'academic_year'];
 
     public function student(): BelongsTo
@@ -23,8 +23,8 @@ class Enrollment extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    public function grades(): HasMany
+    public function grade(): HasOne 
     {
-        return $this->hasMany(Grade::class);
+        return $this->hasOne(Grade::class);
     }
 }

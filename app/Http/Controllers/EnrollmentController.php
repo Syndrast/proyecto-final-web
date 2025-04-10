@@ -13,17 +13,21 @@ use Inertia\Inertia;
 class EnrollmentController extends Controller
 {
     // Listar matrículas (para poder añadir notas después)
-     public function index(): \Inertia\Response
-     {
+    public function index(): \Inertia\Response
+    {
         // Carga ansiosa para evitar N+1
-         $enrollments = Enrollment::with(['student:id,name', 'subject:id,name'])
-                                 ->latest()
-                                 ->paginate(15);
+        $enrollments = Enrollment::with([
+                'student:id,name', 
+                'subject:id,name,code',
+                'grade:enrollment_id,score'
+            ])
+            ->latest('created_at') // Ordenar por fecha de creación
+            ->paginate(15); 
 
-         return Inertia::render('Enrollments/Index', [
-             'enrollments' => $enrollments,
-         ]);
-     }
+        return Inertia::render('Enrollments/Index', [
+            'enrollments' => $enrollments,
+        ]);
+    }
 
     public function create(): \Inertia\Response
     {
@@ -35,7 +39,6 @@ class EnrollmentController extends Controller
 
     public function store(StoreEnrollmentRequest $request): RedirectResponse
     {
-        // Podrías añadir lógica para verificar si ya existe la matrícula para ese año
         Enrollment::create($request->validated());
         return redirect()->route('enrollments.index')->with('success', 'Matrícula registrada correctamente.');
     }
