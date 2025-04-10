@@ -24,12 +24,18 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
+                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </NavLink>
+                            <NavLink href={route('students.index')} active={route().current('students.*')}>
+                                Estudiantes
+                            </NavLink>
+                            <NavLink href={route('subjects.index')} active={route().current('subjects.*')}>
+                                Asignaturas
+                            </NavLink>
+                            <NavLink href={route('enrollments.index')} active={route().current('enrollments.*') || route().current('grades.*')}>
+                                Matrículas y Notas
+                            </NavLink>
                             </div>
                         </div>
 
