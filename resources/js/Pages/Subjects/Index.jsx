@@ -2,8 +2,6 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
-// Considera añadir un componente de Paginación si esperas muchas asignaturas
-// import Pagination from '@/Components/Pagination'; // Componente hipotético
 
 export default function Index({ auth, subjects }) { // 'subjects' es la data paginada pasada desde SubjectController@index
     const { flash } = usePage().props;

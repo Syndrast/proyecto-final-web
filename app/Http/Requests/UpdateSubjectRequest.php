@@ -14,8 +14,6 @@ class UpdateSubjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Opcional: Implementar Policy si es necesario
-        // return $this->user()->can('update', $this->subject);
         return true; // Permitir por ahora
     }
 
@@ -43,8 +41,6 @@ class UpdateSubjectRequest extends FormRequest
                 // La regla unique debe ignorar la asignatura actual al verificar el código
                 Rule::unique('subjects', 'code')->ignore($subjectId)
             ],
-             // Añadir validación para otros campos (ej. créditos) si existen
-            // 'credits' => ['nullable', 'integer', 'min:1'],
         ];
     }
 

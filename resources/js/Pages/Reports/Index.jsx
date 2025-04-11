@@ -100,7 +100,6 @@ export default function Index({ auth, students, subjects, reportData = null, rep
 
                                 <div className="flex items-center gap-4">
                                     <PrimaryButton disabled={processing}>Generar Reporte</PrimaryButton>
-                                    {/* Puedes añadir un mensaje 'Reciente' aquí si es necesario */}
                                 </div>
                             </form>
                         </section>

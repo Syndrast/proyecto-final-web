@@ -14,9 +14,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     if (Auth::check()) {
         // Si el usuario está autenticado, redirige al dashboard
-        // Opcionalmente, podrías renderizar directamente la página de dashboard aquí
         return Inertia::render('Dashboard');
-        //  return redirect()->route('dashboard');
     }else{
         // Si no está autenticado, muestra la página Welcome de Breeze/Inertia
         return redirect()->route('login');

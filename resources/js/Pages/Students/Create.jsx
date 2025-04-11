@@ -10,13 +10,12 @@ export default function Create({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
-        // otros campos...
     });
 
     const submit = (e) => {
         e.preventDefault();
         post(route('students.store'), {
-            onSuccess: () => reset(), // Opcional: limpiar formulario al éxito
+            onSuccess: () => reset(), 
         });
     };
 
@@ -60,8 +59,6 @@ export default function Create({ auth }) {
                                 />
                                 <InputError message={errors.email} className="mt-2" />
                             </div>
-
-                            {/* Añadir más campos aquí si es necesario */}
 
                             <div className="flex items-center justify-end mt-4">
                                 <Link href={route('students.index')} className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-4">

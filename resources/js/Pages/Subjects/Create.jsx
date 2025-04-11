@@ -11,7 +11,6 @@ export default function Create({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '', // Nombre de la asignatura
         code: '', // Código único de la asignatura
-        // Puedes añadir más campos aquí si los tienes en tu modelo/migración (ej. credits: '')
     });
 
     // Función para manejar el envío del formulario
@@ -65,8 +64,6 @@ export default function Create({ auth }) {
                                 />
                                 <InputError message={errors.code} className="mt-2" />
                             </div>
-
-                            {/* Añadir más campos aquí si es necesario (ej. Créditos) */}
 
                             {/* Botones de Acción */}
                             <div className="flex items-center justify-end mt-4">

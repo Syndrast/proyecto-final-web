@@ -29,7 +29,7 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
-     * Define the props that are shared by default.
+     * Define the props that are shared.
      *
      * Estas props estarán disponibles en TODOS tus componentes de página React.
      *
@@ -48,8 +48,6 @@ class HandleInertiaRequests extends Middleware
                     'id' => $request->user()->id,
                     'name' => $request->user()->name,
                     'email' => $request->user()->email,
-                    // Puedes añadir otros campos aquí si los necesitas globalmente
-                    // 'initials' => ...
                 ] : null, // Devuelve null si el usuario no está autenticado
             ],
 
@@ -60,9 +58,6 @@ class HandleInertiaRequests extends Middleware
                     'success' => $request->session()->get('success'),
                     // Obtiene el mensaje 'error' de la sesión. Si no existe, devuelve null.
                     'error' => $request->session()->get('error'),
-                    // Puedes añadir otros tipos de mensajes flash que uses (warning, info)
-                    // 'warning' => $request->session()->get('warning'),
-                    // 'info' => $request->session()->get('info'),
                 ];
             }, 
 

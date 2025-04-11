@@ -67,7 +67,6 @@ export default function Create({ auth, students, subjects }) { // Recibe listas 
 
                             <div>
                                  <InputLabel htmlFor="academic_year" value="Año Académico" />
-                                 {/* Podría ser un TextInput o Select si hay años específicos */}
                                   <TextInput
                                     id="academic_year"
                                     type="number"

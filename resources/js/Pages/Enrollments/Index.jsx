@@ -6,10 +6,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 export default function Index({ auth, enrollments }) {
     const { flash } = usePage().props;
 
-    // Helper para formatear la nota (opcional)
+    // Helper para formatear la nota
     const formatScore = (score) => {
-        // Puedes añadir lógica de formato aquí si quieres (ej. toFixed(2))
-        // Por ahora, solo devuelve el score tal cual.
         return score;
     };
 

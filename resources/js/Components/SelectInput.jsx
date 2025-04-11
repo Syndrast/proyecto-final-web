@@ -9,9 +9,6 @@ const SelectInput = forwardRef(function SelectInput(
     // Si no se pasa una ref externa, usamos una interna.
     const localRef = ref || useRef();
 
-    // Opcional: Podrías añadir lógica aquí si fuera necesario,
-    // pero para un select básico, generalmente no se necesita useEffect.
-
     return (
         <select
             {...props} // Pasa todas las demás props (value, onChange, name, id, required, etc.)

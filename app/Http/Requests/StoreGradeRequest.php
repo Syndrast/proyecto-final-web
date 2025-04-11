@@ -41,8 +41,6 @@ class StoreGradeRequest extends FormRequest
                 'numeric',   // Debe ser un valor numérico (permite decimales)
                 'min:' . $minScore, // Valor mínimo permitido
                 'max:' . $maxScore, // Valor máximo permitido
-                // Opcional: especificar número de decimales si es estricto
-                // 'decimal:0,2' // Permite entre 0 y 2 decimales
             ],
             'assessment_date' => [
                 'nullable', // La fecha puede ser opcional
@@ -67,7 +65,6 @@ class StoreGradeRequest extends FormRequest
             'score.numeric' => 'La calificación debe ser un valor numérico.',
             'score.min' => 'La calificación mínima permitida es :min.',
             'score.max' => 'La calificación máxima permitida es :max.',
-            //'score.decimal' => 'La calificación puede tener hasta :decimal decimales.',
             'assessment_date.date' => 'La fecha de evaluación no tiene un formato válido.',
             'assessment_date.before_or_equal' => 'La fecha de evaluación no puede ser una fecha futura.',
          ];

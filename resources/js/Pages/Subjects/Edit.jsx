@@ -12,7 +12,6 @@ export default function Edit({ auth, subject }) {
     const { data, setData, patch, processing, errors } = useForm({
         name: subject.name, // Valor inicial del nombre
         code: subject.code, // Valor inicial del código
-        // otros campos si existen...
     });
 
     // Manejador para el envío del formulario

@@ -19,8 +19,6 @@ export default function Create({ auth, enrollment, existingGrade }) {
         e.preventDefault();
         // El método POST sigue funcionando bien con updateOrCreate en el backend
         post(route('grades.store'), {
-            // No necesitamos resetear aquí ya que redirigimos
-            // onSuccess: () => reset('score', 'assessment_date'),
         });
     };
 
@@ -50,7 +48,7 @@ export default function Create({ auth, enrollment, existingGrade }) {
                                 <InputLabel htmlFor="score" value="Nota (0 - 20)" />
                                 <TextInput
                                     id="score" type="number" step="any" min="0" max="20" name="score"
-                                    value={data.score} // ¡Importante! Se inicializa con existingGrade.score si existe
+                                    value={data.score}
                                     className="mt-1 block w-full"
                                     onChange={(e) => setData('score', e.target.value)}
                                     required isFocused={true}
@@ -61,7 +59,7 @@ export default function Create({ auth, enrollment, existingGrade }) {
                                 <InputLabel htmlFor="assessment_date" value="Fecha Evaluación" />
                                 <TextInput
                                     id="assessment_date" type="date" name="assessment_date"
-                                    value={data.assessment_date} // ¡Importante! Se inicializa con existingGrade.assessment_date
+                                    value={data.assessment_date}
                                     className="mt-1 block w-full"
                                     onChange={(e) => setData('assessment_date', e.target.value)}
                                 />
@@ -72,7 +70,6 @@ export default function Create({ auth, enrollment, existingGrade }) {
                                     Cancelar
                                 </Link>
                                 <PrimaryButton disabled={processing}>
-                                     {/* El texto del botón puede ser el mismo */}
                                     {processing ? 'Guardando...' : 'Guardar Calificación'}
                                 </PrimaryButton>
                             </div>

@@ -43,12 +43,7 @@ class GradeController extends Controller
 
     public function destroy(Grade $grade): RedirectResponse // <-- Route Model Binding
     {
-         // ** Opcional: Añadir Autorización (Policy) **
-        // if (auth()->user()->cannot('delete', $grade)) {
-        //     abort(403);
-        // }
-
-        // Simplemente elimina la nota
+        // elimina la nota
         $grade->delete();
 
         // Redirige a la lista de matrículas donde se veían las notas

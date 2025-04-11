@@ -51,7 +51,6 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject): RedirectResponse // <-- Route Model Binding
     {
-
         $subject->delete();
 
         return redirect()->route('subjects.index')->with('success', 'Asignatura y sus datos asociados eliminados correctamente.');

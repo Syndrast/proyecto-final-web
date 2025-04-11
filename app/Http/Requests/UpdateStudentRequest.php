@@ -9,7 +9,6 @@ class UpdateStudentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // Podrías usar Policies: return $this->user()->can('update', $this->student);
         return true; // Permitir por ahora
     }
 

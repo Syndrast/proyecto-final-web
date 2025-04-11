@@ -14,8 +14,6 @@ class StoreSubjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Para el MVP, cualquier usuario autenticado puede crear una asignatura.
-        // En el futuro, podrías usar Policies aquí: return $this->user()->can('create', Subject::class);
         return true;
     }
 
@@ -38,8 +36,6 @@ class StoreSubjectRequest extends FormRequest
                 'max:50',   // Longitud máxima de 50 caracteres (ajustar si es necesario)
                 Rule::unique('subjects', 'code') // Debe ser único en la tabla 'subjects', columna 'code'
             ],
-            // Aquí podrías añadir validaciones para otros campos si los tuvieras (ej. créditos)
-            // 'credits' => ['nullable', 'integer', 'min:1'],
         ];
     }
 

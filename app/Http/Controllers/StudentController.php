@@ -52,9 +52,7 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Metodo para eliminar un estudiante
     public function destroy(Student $student): RedirectResponse // <-- Route Model Binding
     {
         $student->delete();
