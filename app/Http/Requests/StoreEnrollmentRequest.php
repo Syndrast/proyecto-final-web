@@ -28,20 +28,28 @@ class StoreEnrollmentRequest extends FormRequest
     {
         return [
             'student_id' => [
-                'required', 
-                'integer',  
-                Rule::exists('students', 'id') // Debe existir un estudiante con este ID en la tabla 'students'
+                'required',
+                'integer',
+                Rule::exists('students', 'id'),
+                // Regla de unicidad combinada para la tabla 'enrollments'
+                Rule::unique('enrollments')->where(function ($query) {
+                    // Construye la condición WHERE para la validación unique
+                    return $query->where('subject_id', $this->input('subject_id'))
+                                 ->where('academic_year', $this->input('academic_year'));
+                    // Laravel automáticamente añadirá ->where('student_id', $this->input('student_id'))
+                    // porque estamos aplicando la regla al campo 'student_id'.
+                })
             ],
             'subject_id' => [
-                'required', 
-                'integer',  
-                Rule::exists('subjects', 'id') // Debe existir una asignatura con este ID en la tabla 'subjects'
+                'required',
+                'integer',
+                Rule::exists('subjects', 'id')
             ],
             'academic_year' => [
                 'required',
-                'digits:4', // Debe ser un número de exactamente 4 dígitos (ej. 2024)
-                'integer',  // Asegura que sea numérico
-                'min:1900', // Año mínimo razonable (ajustar si es necesario)
+                'digits:4',
+                'integer',
+                'min:2000',
             ],
         ];
     }
@@ -57,6 +65,7 @@ class StoreEnrollmentRequest extends FormRequest
             'student_id.required' => 'Debes seleccionar un estudiante.',
             'student_id.integer' => 'El estudiante seleccionado no es válido.',
             'student_id.exists' => 'El estudiante seleccionado no existe.',
+            'student_id.unique' => 'El estudiante ya está matriculado en esta asignatura para el año académico seleccionado.',
             'subject_id.required' => 'Debes seleccionar una asignatura.',
             'subject_id.integer' => 'La asignatura seleccionada no es válida.',
             'subject_id.exists' => 'La asignatura seleccionada no existe.',
