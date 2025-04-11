@@ -19,7 +19,7 @@ class EnrollmentController extends Controller
         $enrollments = Enrollment::with([
                 'student:id,name', 
                 'subject:id,name,code',
-                'grade:enrollment_id,score'
+                'grade:enrollment_id,score,id'
             ])
             ->latest('created_at') // Ordenar por fecha de creación
             ->paginate(15); 

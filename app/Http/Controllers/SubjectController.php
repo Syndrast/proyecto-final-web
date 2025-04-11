@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\Enrollment;
+use App\Models\Grade; 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
@@ -45,5 +47,13 @@ class SubjectController extends Controller
 
         // Redirige de vuelta al índice con un mensaje flash
         return redirect()->route('subjects.index')->with('success', 'Asignatura actualizada correctamente.');
+    }
+
+    public function destroy(Subject $subject): RedirectResponse // <-- Route Model Binding
+    {
+
+        $subject->delete();
+
+        return redirect()->route('subjects.index')->with('success', 'Asignatura y sus datos asociados eliminados correctamente.');
     }
 }

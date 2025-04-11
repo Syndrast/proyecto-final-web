@@ -40,4 +40,18 @@ class GradeController extends Controller
         // Redirige a la lista de matrículas donde se verá la nota actualizada/creada
         return redirect()->route('enrollments.index')->with('success', 'Calificación guardada correctamente.');
     }
+
+    public function destroy(Grade $grade): RedirectResponse // <-- Route Model Binding
+    {
+         // ** Opcional: Añadir Autorización (Policy) **
+        // if (auth()->user()->cannot('delete', $grade)) {
+        //     abort(403);
+        // }
+
+        // Simplemente elimina la nota
+        $grade->delete();
+
+        // Redirige a la lista de matrículas donde se veían las notas
+        return redirect()->route('enrollments.index')->with('success', 'Calificación eliminada correctamente.');
+    }
 }

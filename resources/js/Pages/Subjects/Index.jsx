@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage, router } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 // Considera añadir un componente de Paginación si esperas muchas asignaturas
 // import Pagination from '@/Components/Pagination'; // Componente hipotético
@@ -44,8 +44,8 @@ export default function Index({ auth, subjects }) { // 'subjects' es la data pag
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Código
                                             </th>
-                                            <th scope="col" className="relative px-6 py-3">
-                                                <span className="sr-only">Acciones</span>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Acciones
                                             </th>
                                         </tr>
                                     </thead>
@@ -60,13 +60,28 @@ export default function Index({ auth, subjects }) { // 'subjects' es la data pag
                                                         {subject.code}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <Link
-                                                            href={route('subjects.edit', subject.id)}
-                                                            className="text-indigo-600 hover:text-indigo-900"
-                                                        >
-                                                            Editar
-                                                        </Link>
-                                                         {/* Aquí iría el botón de eliminar en Nivel 3 */}
+                                                        <div className="flex flex-col">
+                                                            <Link
+                                                                href={route('subjects.edit', subject.id)}
+                                                                className="text-indigo-600 hover:text-indigo-900 text-left"
+                                                            >
+                                                                Editar
+                                                            </Link>
+                                                            {/* *** BOTÓN ELIMINAR *** */}
+                                                            <button
+                                                                onClick={() => {
+                                                                    if (window.confirm('¿Estás MUY seguro de eliminar esta asignatura? Se borrarán también todas sus matrículas y calificaciones. ¡Esta acción es irreversible!')) {
+                                                                        router.delete(route('subjects.destroy', subject.id), {
+                                                                            preserveScroll: true,
+                                                                        });
+                                                                    }
+                                                                }}
+                                                                className="text-red-600 hover:text-red-900 font-medium text-left"
+                                                                type="button"
+                                                            >
+                                                                Eliminar
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))
@@ -80,13 +95,6 @@ export default function Index({ auth, subjects }) { // 'subjects' es la data pag
                                     </tbody>
                                 </table>
                             </div>
-
-                            {/* Paginación (si se implementa) */}
-                            {/* {subjects.links && subjects.links.length > 3 && (
-                                <div className="mt-4">
-                                    <Pagination links={subjects.links} />
-                                </div>
-                            )} */}
                         </div>
                     </div>
                 </div>

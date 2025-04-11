@@ -15,16 +15,12 @@ Route::get('/', function () {
     if (Auth::check()) {
         // Si el usuario está autenticado, redirige al dashboard
         // Opcionalmente, podrías renderizar directamente la página de dashboard aquí
-        // return Inertia::render('Dashboard');
-         return redirect()->route('dashboard');
+        return Inertia::render('Dashboard');
+        //  return redirect()->route('dashboard');
+    }else{
+        // Si no está autenticado, muestra la página Welcome de Breeze/Inertia
+        return redirect()->route('login');
     }
-    // Si no está autenticado, muestra la página Welcome de Breeze/Inertia
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -39,8 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // MVP Nivel 1: Gestión Académica
-    Route::resource('students', StudentController::class)->only(['index', 'create', 'store', 'edit', 'update']);
-    Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::resource('students', StudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     // Matricular Estudiante
     Route::get('/enrollments/create', [EnrollmentController::class, 'create'])->name('enrollments.create');
@@ -51,9 +47,7 @@ Route::middleware('auth')->group(function () {
     // Registrar y Consultar Calificación (simple)
     Route::get('/grades/create/{enrollment}', [GradeController::class, 'create'])->name('grades.create'); // Pasar la matrícula
     Route::post('/grades', [GradeController::class, 'store'])->name('grades.store');
-
-    Route::resource('students', StudentController::class)->only(['index', 'create', 'store']);
-    Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store']);
+    Route::delete('/grades/{grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::post('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate'); // Usamos POST para enviar criterios

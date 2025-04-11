@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage, router } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton'; // Componente de Breeze/Jetstream
 // Añade un componente de Paginación simple si quieres mostrar los links
 
@@ -33,7 +33,7 @@ export default function Index({ auth, students }) { // students viene del contro
                                     <tr>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                        <th scope="col" className="relative px-6 py-3"><span className="sr-only">Acciones</span></th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
@@ -42,14 +42,29 @@ export default function Index({ auth, students }) { // students viene del contro
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{student.name}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
                                             {/* *** AÑADIR ENLACE DE EDICIÓN *** */}
-                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <Link
-                                                    href={route('students.edit', student.id)}
-                                                    className="text-indigo-600 hover:text-indigo-900"
-                                                >
-                                                    Editar
-                                                </Link>
-                                                {/* Aquí iría el botón de eliminar en Nivel 3 */}
+                                            <td className="px-6 whitespace-nowrap text-right text-sm font-medium">
+                                                <div className="flex flex-col">
+                                                    <Link
+                                                        href={route('students.edit', student.id)}
+                                                        className="text-indigo-600 hover:text-indigo-900 text-left"
+                                                    >
+                                                        Editar
+                                                    </Link>
+                                                    {/* Boton de eliminar */}
+                                                    <button
+                                                        onClick={() => {
+                                                            if (window.confirm('¿Estás MUY seguro de eliminar este estudiante? Se borrarán también todas sus matrículas y calificaciones. ¡Esta acción es irreversible!')) {
+                                                                router.delete(route('students.destroy', student.id), {
+                                                                    preserveScroll: true, // Evita saltar al inicio de la página
+                                                                });
+                                                            }
+                                                        }}
+                                                        className="text-red-600 hover:text-red-900 font-medium text-left" // Estilo similar a un enlace pero como botón
+                                                        type="button" // Importante para no enviar formularios si estuviera dentro de uno
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

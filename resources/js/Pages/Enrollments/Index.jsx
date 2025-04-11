@@ -57,27 +57,47 @@ export default function Index({ auth, enrollments }) {
                                                     {enrollment.grade ? formatScore(enrollment.grade.score) : 'Sin calificar'}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    {/* *** TEXTO DEL ENLACE ACTUALIZADO (Opcional) *** */}
-                                                    <Link href={route('grades.create', enrollment.id)} className="text-indigo-600 hover:text-indigo-900">
-                                                        {/* Cambia el texto si ya hay nota o mantenlo simple */}
-                                                        {enrollment.grade ? 'Editar Nota' : 'Registrar Nota'}
-                                                    </Link>
+                                                    <div className="flex flex-col"> {/* Contenedor para apilar las acciones */}
+                                                        <Link href={route('grades.create', enrollment.id)} className="text-indigo-600 hover:text-indigo-900">
+                                                            {enrollment.grade ? 'Editar Nota' : 'Registrar Nota'}
+                                                        </Link>
 
-                                                    {/* *** AÑADIR BOTÓN/ENLACE ELIMINAR *** */}
-                                                    <button
-                                                        onClick={() => {
-                                                            // Añadir confirmación
-                                                            if (window.confirm('¿Estás seguro de que deseas eliminar esta matrícula? Esta acción no se puede deshacer.')) {
-                                                                // Usar Inertia router para enviar la petición DELETE
-                                                                router.delete(route('enrollments.destroy', enrollment.id), {
-                                                                    preserveScroll: true, // Para no saltar al inicio de la página
-                                                                    // onSuccess: () => { /* Opcional: mostrar notificación extra */ }
-                                                                });
-                                                            }
-                                                        }}
-                                                        className="text-red-600 hover:text-red-900">
-                                                        Desmatricular
-                                                    </button>
+                                                        {enrollment.grade && (
+                                                            <button
+                                                                onClick={() => {
+                                                                    console.log('Intentando eliminar Grade ID:', enrollment.grade?.id);
+                                                                    const gradeId = enrollment.grade?.id;
+                                                                    if (!gradeId) {
+                                                                        console.error('Error: No se pudo obtener el ID de la nota para eliminar.');
+                                                                        alert('Error: No se pudo obtener el ID de la nota.');
+                                                                        return;
+                                                                    }
+                                                                    if (window.confirm('¿Estás seguro de eliminar esta calificación?')) {
+                                                                        router.delete(route('grades.destroy', { grade: enrollment.grade.id }), {
+                                                                            preserveScroll: true,
+                                                                        });
+                                                                    }
+                                                                }}
+                                                                className="text-red-600 hover:text-red-900 font-medium text-left"
+                                                                type="button"
+                                                            >
+                                                                Eliminar Nota
+                                                            </button>
+                                                        )}
+
+                                                        <button
+                                                            onClick={() => {
+                                                                if (window.confirm('¿Estás seguro de que deseas eliminar esta matrícula? Esta acción no se puede deshacer.')) {
+                                                                    router.delete(route('enrollments.destroy', enrollment.id), {
+                                                                        preserveScroll: true,
+                                                                    });
+                                                                }
+                                                            }}
+                                                            className="text-red-600 hover:text-red-900 text-left"
+                                                        >
+                                                            Desmatricular
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}

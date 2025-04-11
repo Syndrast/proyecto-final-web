@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest; // Importa tu request
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Enrollment;
+use App\Models\Grade;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -47,5 +50,16 @@ class StudentController extends Controller
 
         // Redirigir de vuelta al índice con un mensaje
         return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Student $student): RedirectResponse // <-- Route Model Binding
+    {
+        $student->delete();
+
+        // Redirigir de vuelta al índice con un mensaje
+        return redirect()->route('students.index')->with('success', 'Estudiante y sus datos asociados eliminados correctamente.');
     }
 }
