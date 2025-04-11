@@ -1,66 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestión Académica - Laravel & React (Inertia.js)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web para la gestión de estudiantes, asignaturas, matrículas y calificaciones en un entorno universitario, construida con Laravel como backend y React (a través de Inertia.js) como frontend.
 
-## About Laravel
+## Tabla de Contenidos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   [Descripción](#descripción)
+-   [Características](#características)
+-   [Stack Tecnológico](#stack-tecnológico)
+-   [Prerrequisitos](#prerrequisitos)
+-   [Instalación Local](#instalación-local)
+-   [Uso](#uso)
+-   [Estructura del Proyecto](#estructura-del-proyecto)
+-   [Documentación Técnica Adicional](#documentación-técnica-adicional)
+-   [Contribuciones](#contribuciones)
+-   [Licencia](#licencia)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Descripción
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Este proyecto tiene como objetivo proporcionar una herramienta centralizada y eficiente para administrar la información académica fundamental. Permite al personal autorizado gestionar ciclos de vida de estudiantes, el catálogo de asignaturas, las inscripciones anuales y el registro de calificaciones.
 
-## Learning Laravel
+## Características Implementadas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Nivel 1 (MVP):**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+*   Registro de nuevos estudiantes.
+*   Consulta de lista de estudiantes.
+*   Registro de nuevas asignaturas.
+*   Consulta de lista de asignaturas.
+*   Matriculación de un estudiante en una asignatura para un año académico.
+*   Consulta de lista de matrículas.
+*   Registro de la calificación final para una matrícula.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Nivel 2:**
 
-## Laravel Sponsors
+*   Modificación de datos de estudiantes existentes.
+*   Modificación de datos de asignaturas existentes.
+*   Desmatriculación de un estudiante (eliminar matrícula y su nota asociada).
+*   Modificación de una calificación existente.
+*   Generación de reportes básicos (ej. estudiantes por asignatura, asignaturas por estudiante).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Nivel 3:**
 
-### Premium Partners
+*   Eliminación de un estudiante (con sus matrículas y notas asociadas).
+*   Eliminación de una asignatura (con sus matrículas y notas asociadas).
+*   Eliminación de una calificación individual (sin eliminar la matrícula).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Otras Características:**
 
-## Contributing
+*   Autenticación de usuarios (Login, Registro, Logout) proporcionada por Laravel Breeze.
+*   Interfaz de usuario responsiva construida con React y Tailwind CSS.
+*   Navegación fluida tipo SPA gracias a Inertia.js.
+*   Validación robusta de datos en el backend (Form Requests).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Stack Tecnológico
 
-## Code of Conduct
+*   **Backend:** PHP 8.2+, Laravel 11.x
+*   **Frontend:** React 18.x, Inertia.js, Vite
+*   **Estilos:** Tailwind CSS 3.x
+*   **Base de Datos:** PostgreSQL 14+ / MySQL 8.0+ (Configurable vía `.env`)
+*   **Servidor Web (Desarrollo):** `php artisan serve` / `npm run dev` (Vite)
+*   **Gestor de Dependencias PHP:** Composer
+*   **Gestor de Paquetes JS:** npm 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Prerrequisitos
 
-## Security Vulnerabilities
+Asegúrate de tener instalados los siguientes componentes en tu sistema local:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+*   PHP (versión compatible con el proyecto, ej. 8.2+)
+*   Composer v2+
+*   Node.js (versión LTS recomendada, ej. v18 o v20+) y npm (o Yarn)
+*   Un servidor de base de datos: PostgreSQL o MySQL.
+*   Git
 
-## License
+## Instalación Local
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sigue estos pasos para configurar el proyecto en tu máquina local:
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/Syndrast/proyecto-final-web.git
+    cd proyecto-final-web
+    ```
+
+2.  **Instalar dependencias PHP:**
+    ```bash
+    composer install
+    ```
+
+3.  **Configurar el entorno:**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4.  **Configurar la Conexión a la Base de Datos en `.env`:**
+    *   Abre el archivo `.env` que acabas de crear.
+    *   Localiza las variables `DB_*`.
+    *   Establece `DB_CONNECTION` a `pgsql` o `mysql` según la base de datos que vayas a usar localmente.
+    *   Establece `DB_HOST` a `127.0.0.1` (o `localhost`).
+    *   Establece `DB_PORT` al puerto de tu servidor de base de datos local (por defecto `5432` para PostgreSQL, `3306` para MySQL).
+    *   Define un nombre para tu base de datos local en `DB_DATABASE` (ej. `gestion_academica_db`).
+    *   Define un nombre de usuario y contraseña para la base de datos local en `DB_USERNAME` y `DB_PASSWORD`.
+
+5.  **Crear la Base de Datos Localmente:**
+    *   Asegúrate de que tu servidor de base de datos (PostgreSQL o MySQL) esté corriendo localmente.
+    *   **Crea una base de datos vacía** con el mismo nombre que especificaste en `DB_DATABASE` en el archivo `.env`.
+    *   **Crea un usuario de base de datos** con el nombre de usuario y contraseña que especificaste en `DB_USERNAME` y `DB_PASSWORD`.
+    *   **Otorga todos los privilegios** necesarios a ese usuario sobre la base de datos recién creada.
+        *   *Ejemplo para PostgreSQL (usando `psql`):*
+            ```sql
+            -- Conectado como superusuario (ej. postgres)
+            CREATE DATABASE gestion_academica_db;
+            CREATE USER mi_usuario WITH ENCRYPTED PASSWORD 'mi_password_segura';
+            GRANT ALL PRIVILEGES ON DATABASE gestion_academica_db TO mi_usuario;
+            ```
+        *   *Ejemplo para MySQL (usando cliente `mysql`):*
+            ```sql
+            -- Conectado como root o usuario con privilegios
+            CREATE DATABASE gestion_academica_db;
+            CREATE USER 'mi_usuario'@'localhost' IDENTIFIED BY 'mi_password_segura';
+            GRANT ALL PRIVILEGES ON gestion_academica_db.* TO 'mi_usuario'@'localhost';
+            FLUSH PRIVILEGES;
+            ```
+        *Reemplaza `gestion_academica_db`, `mi_usuario` y `mi_password_segura` con tus valores reales.*
+
+6.  **Instalar dependencias JavaScript:**
+    ```bash
+    npm install
+    ```
+
+7.  **Ejecutar las migraciones:** Esto creará la estructura de tablas en tu base de datos.
+    ```bash
+    php artisan migrate
+    ```
+
+8.  **Compilar Assets (para producción):** Si no vas a usar `npm run dev`.
+    ```bash
+    npm run build
+    ```
+
+## Uso
+
+1.  **Iniciar el Servidor de Desarrollo Laravel:**
+    ```bash
+    php artisan serve
+    ```
+
+2.  **Iniciar el Servidor de Desarrollo Vite (en otra terminal):**
+    ```bash
+    npm run dev
+    ```
+
+3.  Abre tu navegador y ve a la URL proporcionada por `php artisan serve` (normalmente `http://127.0.0.1:8000`).
+
+4.  **Registrate en la pagina:**
+
+## Documentación Técnica Adicional
+
+Para una descripción más detallada de la arquitectura, configuración, flujo de datos y decisiones de diseño, consulta el archivo "Documentación Técnica.pdf"
