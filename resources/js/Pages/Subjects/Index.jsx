@@ -44,11 +44,9 @@ export default function Index({ auth, subjects }) { // 'subjects' es la data pag
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Código
                                             </th>
-                                            {/* Puedes añadir más columnas si tienes más datos (créditos, etc.) */}
-                                            {/* Columna para acciones futuras (Editar/Eliminar) */}
-                                            {/* <th scope="col" className="relative px-6 py-3">
+                                            <th scope="col" className="relative px-6 py-3">
                                                 <span className="sr-only">Acciones</span>
-                                            </th> */}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
@@ -61,10 +59,15 @@ export default function Index({ auth, subjects }) { // 'subjects' es la data pag
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                         {subject.code}
                                                     </td>
-                                                    {/* Celdas para acciones */}
-                                                    {/* <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <Link href={route('subjects.edit', subject.id)} className="text-indigo-600 hover:text-indigo-900 mr-3">Editar</Link>
-                                                    </td> */}
+                                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <Link
+                                                            href={route('subjects.edit', subject.id)}
+                                                            className="text-indigo-600 hover:text-indigo-900"
+                                                        >
+                                                            Editar
+                                                        </Link>
+                                                         {/* Aquí iría el botón de eliminar en Nivel 3 */}
+                                                    </td>
                                                 </tr>
                                             ))
                                         ) : (

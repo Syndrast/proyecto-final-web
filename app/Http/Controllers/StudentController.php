@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest; // Importa tu request
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 
 class StudentController extends Controller
 {
@@ -28,5 +30,22 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Estudiante registrado correctamente.');
     }
 
-    // Otros métodos (show, edit, update, destroy) se añadirían para Niveles 2 y 3
+    // Método para mostrar el formulario de edición
+    public function edit(Student $student): Response // <-- Route Model Binding
+    {
+        // Pasa el estudiante existente a la vista de edición
+        return Inertia::render('Students/Edit', [
+            'student' => $student
+        ]);
+    }
+
+    // Método para procesar la actualización
+    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse // <-- Route Model Binding y FormRequest
+    {
+        // $request->validated() ya contiene los datos validados
+        $student->update($request->validated());
+
+        // Redirigir de vuelta al índice con un mensaje
+        return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente.');
+    }
 }

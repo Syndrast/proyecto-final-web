@@ -36,6 +36,9 @@ export default function AuthenticatedLayout({ header, children }) {
                             <NavLink href={route('enrollments.index')} active={route().current('enrollments.*') || route().current('grades.*')}>
                                 Matrículas y Notas
                             </NavLink>
+                            <NavLink href={route('reports.index')} active={route().current('reports.*')}>
+                                Reportes
+                            </NavLink>
                             </div>
                         </div>
 

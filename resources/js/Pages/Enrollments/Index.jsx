@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage, router } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function Index({ auth, enrollments }) {
@@ -62,6 +62,22 @@ export default function Index({ auth, enrollments }) {
                                                         {/* Cambia el texto si ya hay nota o mantenlo simple */}
                                                         {enrollment.grade ? 'Editar Nota' : 'Registrar Nota'}
                                                     </Link>
+
+                                                    {/* *** AÑADIR BOTÓN/ENLACE ELIMINAR *** */}
+                                                    <button
+                                                        onClick={() => {
+                                                            // Añadir confirmación
+                                                            if (window.confirm('¿Estás seguro de que deseas eliminar esta matrícula? Esta acción no se puede deshacer.')) {
+                                                                // Usar Inertia router para enviar la petición DELETE
+                                                                router.delete(route('enrollments.destroy', enrollment.id), {
+                                                                    preserveScroll: true, // Para no saltar al inicio de la página
+                                                                    // onSuccess: () => { /* Opcional: mostrar notificación extra */ }
+                                                                });
+                                                            }
+                                                        }}
+                                                        className="text-red-600 hover:text-red-900">
+                                                        Desmatricular
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}

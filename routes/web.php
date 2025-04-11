@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,22 +39,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // MVP Nivel 1: Gestión Académica
-    Route::resource('students', StudentController::class)->only(['index', 'create', 'store']); // Consultar (index), Registrar (create, store)
-    Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store']); // Consultar (index), Registrar (create, store)
+    Route::resource('students', StudentController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
 
     // Matricular Estudiante
     Route::get('/enrollments/create', [EnrollmentController::class, 'create'])->name('enrollments.create');
     Route::post('/enrollments', [EnrollmentController::class, 'store'])->name('enrollments.store');
     Route::get('/enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index'); // Para listar matriculas y poder añadir nota
+    Route::delete('/enrollments/{enrollment}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
 
     // Registrar y Consultar Calificación (simple)
     Route::get('/grades/create/{enrollment}', [GradeController::class, 'create'])->name('grades.create'); // Pasar la matrícula
     Route::post('/grades', [GradeController::class, 'store'])->name('grades.store');
-     // Podríamos añadir un index a GradeController o mostrar las notas en enrollments.index
-    // Route::get('/grades', [GradeController::class, 'index'])->name('grades.index'); // Opcional para MVP
 
     Route::resource('students', StudentController::class)->only(['index', 'create', 'store']);
     Route::resource('subjects', SubjectController::class)->only(['index', 'create', 'store']);
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate'); // Usamos POST para enviar criterios
 });
 
 require __DIR__.'/auth.php'; // Rutas de autenticación de Breeze

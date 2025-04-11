@@ -33,7 +33,7 @@ export default function Index({ auth, students }) { // students viene del contro
                                     <tr>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                        {/* <th scope="col" className="relative px-6 py-3"><span className="sr-only">Acciones</span></th> */}
+                                        <th scope="col" className="relative px-6 py-3"><span className="sr-only">Acciones</span></th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
@@ -41,12 +41,22 @@ export default function Index({ auth, students }) { // students viene del contro
                                         <tr key={student.id}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{student.name}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
-                                            {/* Acciones (Editar/Ver/Eliminar) irían aquí en niveles superiores */}
+                                            {/* *** AÑADIR ENLACE DE EDICIÓN *** */}
+                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <Link
+                                                    href={route('students.edit', student.id)}
+                                                    className="text-indigo-600 hover:text-indigo-900"
+                                                >
+                                                    Editar
+                                                </Link>
+                                                {/* Aquí iría el botón de eliminar en Nivel 3 */}
+                                            </td>
                                         </tr>
                                     ))}
+                                    {/* Ajusta el colspan si tienes una fila de No hay estudiantes */}
                                     {students.data.length === 0 && (
                                         <tr>
-                                            <td colSpan="2" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No hay estudiantes registrados.</td>
+                                            <td colSpan="3" /* <-- Ajusta el número */ className="...">No hay estudiantes...</td>
                                         </tr>
                                     )}
                                 </tbody>

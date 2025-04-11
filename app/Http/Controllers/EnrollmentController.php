@@ -42,4 +42,17 @@ class EnrollmentController extends Controller
         Enrollment::create($request->validated());
         return redirect()->route('enrollments.index')->with('success', 'Matrícula registrada correctamente.');
     }
+
+    public function destroy(Enrollment $enrollment): RedirectResponse // <-- Route Model Binding
+    {
+        // Eliminar la nota asociada PRIMERO (si existe)
+        // Si tienes onDelete('cascade') en la migración de grades, esto no es estrictamente necesario,
+        // pero hacerlo explícito puede ser más claro o útil si no usas cascade.
+        $enrollment->grade()->delete(); // Esto elimina la nota si existe (no falla si no existe)
+
+        // Eliminar la matrícula
+        $enrollment->delete();
+
+        return redirect()->route('enrollments.index')->with('success', 'Matrícula eliminada correctamente.');
+    }
 }
